@@ -1,10 +1,10 @@
 # SecurityAuditScript
 My security audit script that decreases time wasted on obtaining audit information and returns it into a textfile. It then opens the text file ready to be analysed.
 It was written and compiled in Python 3.10.5. 
-The print statements are a GUI for the output.txt file
-Some features require admin priviledges
-Some features added as a bonus that dont need to be there
-Remember to change the names of AV and VPN
+The print statements are a GUI for the output.txt file.
+Some features require admin priviledges.
+Some features added as a bonus that dont need to be there.
+Remember to change the names of AV and VPN.
 
 What it does:
 Checks for installed AV&VPN,
