@@ -1,5 +1,6 @@
 # SecurityAuditScript
 My security audit script that decreases time wasted on obtaining audit information and returns it into a textfile. It then opens the text file ready to be analysed.
+It was written and compiled in Python 3.10.5. 
 
 Some features require admin priviledges
 
