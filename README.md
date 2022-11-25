@@ -8,11 +8,11 @@ Remember to change the names of AV and VPN
 
 What it does:
 Checks for installed AV&VPN,
-User accounts for the device
-Users with admin privileges
-Remote connection apps
-status of AV, sysinfo, running services, firewall settings for public profile, bitlocker status
-Installed software list
+User accounts for the device,
+Users with admin privileges, 
+Remote connection apps,
+status of AV, sysinfo, running services, firewall settings for public profile, bitlocker status,
+Installed software list,
 AV scan (optional)
 
 
