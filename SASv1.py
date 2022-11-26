@@ -15,13 +15,13 @@ with open('output.txt', 'w') as f:
     else: f.write("----------------------------------------\n|!!!!! NAME OF VPN not found !!!!!|\n----------------------------------------\n===============================================================================\n               ############## User Accounts ##############\n==============================================================================="), f.flush()
     
 #### Users check   
-    p8 = subprocess.run(["powershell.exe", """net user"""], shell=True, stdout=f, text=True)   #show all users    
+    p1 = subprocess.run(["powershell.exe", """net user"""], shell=True, stdout=f, text=True)   #show all users    
     print("-------------------------------------------------------------------------------\n               ############## Admin accounts ##############\n-------------------------------------------------------------------------------", end='\n\n', file=f), f.flush()     
     
-    p9 = subprocess.run(["powershell.exe", """net localgroup administrators"""], shell=True, stdout=f, text=True)    #show admin users
+    p2 = subprocess.run(["powershell.exe", """net localgroup administrators"""], shell=True, stdout=f, text=True)    #show admin users
     print('===============================================================================\n               ############## Remote Connections ##############\n===============================================================================', file=f), f.flush()    
  #####  Remote connections check
-    p12 = subprocess.run(["powershell.exe", "-Command", 'get-service "remote desktop services" | select Displayname,Status,ServiceName,Can*'], shell=True, stdout=f, text=True),  f.flush
+    p3 = subprocess.run(["powershell.exe", "-Command", 'get-service "remote desktop services" | select Displayname,Status,ServiceName,Can*'], shell=True, stdout=f, text=True),  f.flush
    
     AD = list(winapps.search_installed('Anydesk'))
     if AD: print(*AD, sep='\n\n', end='\n\n', file=f)
@@ -32,22 +32,22 @@ with open('output.txt', 'w') as f:
     else: f.write("-------------------------\n| TeamViewer not found  |\n-------------------------\n")
     print('===============================================================================\n               ############## AntiVirus Status ##############\n===============================================================================', file=f), f.flush()            
 #### Status of antimalware, sysinfo, services, sfc scan firewall settings, bitlocker status
-    p1 = subprocess.call('powershell.exe Get-MpComputerStatus', shell=True, stdout=f, text=True)    #AV Detail status
+    p4 = subprocess.call('powershell.exe Get-MpComputerStatus', shell=True, stdout=f, text=True)    #AV Detail status
     print("===============================================================================\n               ############## SYSTEMINFO ##############\n===============================================================================", file=f), f.flush() 
      
-    p2 = subprocess.run('systeminfo', stdout=f, text=True)            #sysinfo    
+    p5 = subprocess.run('systeminfo', stdout=f, text=True)            #sysinfo    
     print("\n===============================================================================\n               ############## FIREWALL-STATUS ##############\n===============================================================================", file=f), f.flush() 
     
-    p3 = subprocess.check_call('netsh advfirewall show Publicprofile', stdout=f, text=True)  # FWINFO                         
+    p6 = subprocess.check_call('netsh advfirewall show Publicprofile', stdout=f, text=True)  # FWINFO                         
     print("===============================================================================\n               ############## IPCONFIG ##############\n===============================================================================", file=f), f.flush() 
    
-    p4 = subprocess.run('ipconfig /all', stdout=f, text=True)  # IPINFO            
+    p7 = subprocess.run('ipconfig /all', stdout=f, text=True)  # IPINFO            
     print('\n\n===============================================================================\n               ############## BITLOCKER-STATUS ##############\n===============================================================================', end='\n\n', file=f), f.flush() 
 
-    p5 = subprocess.run(["powershell.exe", """manage-bde -status"""], shell=True, stdout=f, text=True)
+    p8 = subprocess.run(["powershell.exe", """manage-bde -status"""], shell=True, stdout=f, text=True)
     print("\n\n===============================================================================\n                  ############## SERVICES ##############\n===============================================================================", file=f), f.flush() 
 
-    p10 = subprocess.run(["powershell.exe", """Get-Service | Select StartType, Status, Name, DisplayName | Where-Object {$_.Status -eq 'Running'} | Format-Table -AutoSize"""], shell=True, stdout=f, text=True)  # running services
+    p9 = subprocess.run(["powershell.exe", """Get-Service | Select StartType, Status, Name, DisplayName | Where-Object {$_.Status -eq 'Running'} | Format-Table -AutoSize"""], shell=True, stdout=f, text=True)  # running services
     print("===============================================================================\n               ############## INSTALLED-SOFTWARE ##############\n===============================================================================", file=f), f.flush() 
 ##### Installed software check  & extra scans feature
     for item in winapps.list_installed(): print(item, file=f)                      
