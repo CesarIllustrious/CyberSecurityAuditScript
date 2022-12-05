@@ -6,14 +6,14 @@ from unittest import result
 with open('output.txt', 'w') as f:
 #### AV & VPN Check
     print('=== is new section,\n--- is new command in the section\n### is info type\n\n===============================================================================\n               ############## AV&VPN ##############\n===============================================================================', end='\n\n', file=f)    
-    BD = list(winapps.search_installed('NAME OF ANTIVIRUS'))   #change the name to your company's AV
-    if BD: print(*BD,sep='\n\n', end='\n\n', file=f)
-    else: f.write("-----------------------------------\n|!!!!! NAME OF AV not found !!!!!|\n-----------------------------------\n"), f.flush   #change the output name
+    AV = list(winapps.search_installed('NAME OF ANTIVIRUS'))   # <---- change the name to your company's AV
+    if AV: print(*AV,sep='\n\n', end='\n\n', file=f)
+    else: f.write("-----------------------------------\n|!!!!! NAME OF AV not found !!!!!|\n-----------------------------------\n"), f.flush   # <---- change the output name
     
-    cisco = list(winapps.search_installed('NAME OF VPN'))  #change to company VPN name
-    if cisco: print(*cisco, sep='\n\n', end='\n\n', file=f)
+    VPN = list(winapps.search_installed('NAME OF VPN'))  # <---- change to company VPN name
+    if VPN: print(*VPN, sep='\n\n', end='\n\n', file=f)
     else: f.write("----------------------------------------\n|!!!!! NAME OF VPN not found !!!!!|\n----------------------------------------\n===============================================================================\n               ############## User Accounts ##############\n==============================================================================="), f.flush()
-    
+                                                                      # ^ change the output name
 #### Users check   
     p1 = subprocess.run(["powershell.exe", """net user"""], shell=True, stdout=f, text=True)   #show all users    
     print("-------------------------------------------------------------------------------\n               ############## Admin accounts ##############\n-------------------------------------------------------------------------------", end='\n\n', file=f), f.flush()     
@@ -31,7 +31,7 @@ with open('output.txt', 'w') as f:
     if TV: print(*TV, sep='\n\n', end='\n\n', file=f)
     else: f.write("-------------------------\n| TeamViewer not found  |\n-------------------------\n")
     print('===============================================================================\n               ############## AntiVirus Status ##############\n===============================================================================', file=f), f.flush()            
-#### Status of antimalware, sysinfo, services, sfc scan firewall settings, bitlocker status
+#### Status of antimalware, sysinfo, services, firewall settings, bitlocker status
     p4 = subprocess.call('powershell.exe Get-MpComputerStatus', shell=True, stdout=f, text=True)    #AV Detail status
     print("===============================================================================\n               ############## SYSTEMINFO ##############\n===============================================================================", file=f), f.flush() 
      
@@ -49,10 +49,10 @@ with open('output.txt', 'w') as f:
 
     p9 = subprocess.run(["powershell.exe", """Get-Service | Select StartType, Status, Name, DisplayName | Where-Object {$_.Status -eq 'Running'} | Format-Table -AutoSize"""], shell=True, stdout=f, text=True)  # running services
     print("===============================================================================\n               ############## INSTALLED-SOFTWARE ##############\n===============================================================================", file=f), f.flush() 
-##### Installed software check  & extra scans feature
+##### Installed software check  & extra scans featureS
     for item in winapps.list_installed(): print(item, file=f)                      
     f.flush()
-    #FEATURE ENABLED BY DELETING '#' before the pX, requires admin
+    #FEATURE ENABLED BY DELETING '#' before the px, requires admin
     #p6 = subprocess.run('sfc /scannow', stdout=f, text=True)  # System File Checker in case new drives needed   
     #p7 = subprocess.call('powershell.exe Start-MpScan', shell=True, stdout=f, text=True)    # start AV scan
    
