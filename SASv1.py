@@ -1,12 +1,7 @@
 import os, sys, winapps, subprocess, wmi
 from unittest import result
  
-output = subprocess.run(
-    ["powershell.exe", "-Command", 'wmic product get name'],
-    shell=True,
-    stdout=subprocess.PIPE,
-    encoding="UTF-8"
-)
+
 
 with open('output.txt', 'w') as f:
 #### AV & VPN Check
@@ -55,6 +50,12 @@ with open('output.txt', 'w') as f:
     p9 = subprocess.run(["powershell.exe", """Get-Service | Select StartType, Status, Name, DisplayName | Where-Object {$_.Status -eq 'Running'} | Format-Table -AutoSize"""], shell=True, stdout=f, text=True)  # running services
     print("===============================================================================\n               ############## INSTALLED-SOFTWARE ##############\n===============================================================================", file=f), f.flush() 
 ##### Installed software check  & extra scans featureS
+    output = subprocess.run(
+    ["powershell.exe", "-Command", 'wmic product get name'],
+    shell=True,
+    stdout=subprocess.PIPE,
+    encoding="UTF-8"
+)
     f.write(output.stdout)                      
     f.flush()
     #FEATURE ENABLED BY DELETING '#' before the px, requires admin
