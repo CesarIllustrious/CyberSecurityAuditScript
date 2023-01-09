@@ -52,11 +52,15 @@ with open('output.txt', 'w') as f:
 ##### Installed software check  & extra scans featureS
     output = subprocess.run(
     ["powershell.exe", "-Command", 'wmic product get name'],
-    shell=True,
-    stdout=subprocess.PIPE,
-    encoding="UTF-8"
-)
-    f.write(output.stdout)                      
+    shell = True,
+    stdout = subprocess.PIPE,
+    encoding = "UTF-8")
+    # Split the output into lines
+    lines = output.stdout.split("\n")
+    # Write only the non-empty lines to the file
+    for line in lines:
+        if line.strip():
+            f.write(line + "\n")                       
     f.flush()
     #FEATURE ENABLED BY DELETING '#' before the px, requires admin
     #p6 = subprocess.run('sfc /scannow', stdout=f, text=True)  # System File Checker in case new drives needed   
